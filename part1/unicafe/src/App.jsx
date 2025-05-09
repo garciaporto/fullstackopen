@@ -8,7 +8,7 @@ const Button = ({ handleClick, text }) => {
   );
 };
 
-const Reviews = ({ reviewGood, reviewBad, reviewNeutral, textGood, textBad, textNeutral, stats }) => {
+const Statistics = ({ reviewGood, reviewBad, reviewNeutral, textGood, textBad, textNeutral, stats }) => {
   if (reviewGood === 0 && reviewBad === 0 && reviewNeutral === 0) {
     return <div>leave a review</div>;
   }
@@ -71,7 +71,7 @@ const App = () => {
       <Button handleClick={flat} text="Neutral" />
       <Button handleClick={negative} text="Bad" />
       <h2>statistics</h2>
-      <Reviews reviewGood={reviews.good} textGood="Good" reviewBad={reviews.bad} textBad="Bad" reviewNeutral={reviews.neutral} textNeutral="Neutral" stats={count} />
+      <Statistics reviewGood={reviews.good} textGood="Good" reviewBad={reviews.bad} textBad="Bad" reviewNeutral={reviews.neutral} textNeutral="Neutral" stats={count} />
     </div>
   );
 };
