@@ -8,39 +8,59 @@ const Button = ({ handleClick, text }) => {
   );
 };
 
-const Statistics = ({ reviewGood, reviewBad, reviewNeutral, textGood, textBad, textNeutral, stats }) => {
+const Statistics = ({ reviewGood, reviewBad, reviewNeutral, textGood, textBad, textNeutral }) => {
   if (reviewGood === 0 && reviewBad === 0 && reviewNeutral === 0) {
-    return <div>leave a review</div>;
+    return (
+      <>
+        <tr>
+          <td>leave a review</td>
+        </tr>
+      </>
+    );
   }
 
   let totalReviews = reviewBad + reviewGood + reviewNeutral;
   let positiveRatio = (reviewGood * 100) / totalReviews;
 
   return (
-    <div>
-      <p>
-        {textGood}: {reviewGood}
-      </p>
-      <p>
-        {textNeutral}: {reviewNeutral}
-      </p>
-      <p>
-        {textBad}: {reviewBad}
-      </p>
-      <p>Total Reviews: {totalReviews}</p>
-      <p>Positive ratio: {positiveRatio.toFixed(2)}%</p>
-    </div>
+    <>
+      <tr>
+        <td>{textGood}</td>
+        <td>{reviewGood}</td>
+      </tr>
+      <tr>
+        <td>{textNeutral}</td>
+        <td>{reviewNeutral}</td>
+      </tr>
+      <tr>
+        <td>{textBad}</td>
+        <td>{reviewBad}</td>
+      </tr>
+      <tr>
+        <td>Total Reviews</td>
+        <td>{totalReviews}</td>
+      </tr>
+      <tr>
+        <td>Positive ratio</td>
+        <td>{positiveRatio.toFixed(2)}%</td>
+      </tr>
+    </>
   );
 };
 
 const StatisticsLine = ({ total, divider }) => {
   let calculatedStats = total / divider;
   if (divider > 0) {
-    return (
-      <div>
-        <p>Reviews stats: {calculatedStats.toFixed(2)}</p>
-      </div>
-    );
+    if (document.querySelector("#stats")) {
+      return (
+        <>
+          <tr>
+            {" "}
+            <td>Reviews stats:</td> <td> {calculatedStats.toFixed(2)}</td>{" "}
+          </tr>
+        </>
+      );
+    }
   }
 };
 
@@ -87,8 +107,12 @@ const App = () => {
       <Button handleClick={flat} text="Neutral" />
       <Button handleClick={negative} text="Bad" />
       <h2>statistics</h2>
-      <Statistics reviewGood={reviews.good} textGood="Good" reviewBad={reviews.bad} textBad="Bad" reviewNeutral={reviews.neutral} textNeutral="Neutral" stats={count} />
-      <StatisticsLine divider={reviews.good + reviews.neutral + reviews.bad} total={count} />
+      <table>
+        <tbody>
+          <Statistics reviewGood={reviews.good} textGood="Good" reviewBad={reviews.bad} textBad="Bad" reviewNeutral={reviews.neutral} textNeutral="Neutral" />
+          <StatisticsLine divider={reviews.good + reviews.neutral + reviews.bad} total={count} />
+        </tbody>
+      </table>
     </div>
   );
 };
