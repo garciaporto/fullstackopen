@@ -14,19 +14,34 @@ const Statistics = ({ reviewGood, reviewBad, reviewNeutral, textGood, textBad, t
   }
 
   let totalReviews = reviewBad + reviewGood + reviewNeutral;
-  let calculatedStats = stats / totalReviews;
   let positiveRatio = (reviewGood * 100) / totalReviews;
 
   return (
     <div>
-      {textGood}: {reviewGood} <br />
-      {textNeutral}: {reviewNeutral} <br />
-      {textBad}: {reviewBad} <br />
-      Reviews stats: {calculatedStats.toFixed(2)} <br />
-      Total Reviews: {totalReviews} <br />
-      Positive ratio: {positiveRatio.toFixed(2)}%
+      <p>
+        {textGood}: {reviewGood}
+      </p>
+      <p>
+        {textNeutral}: {reviewNeutral}
+      </p>
+      <p>
+        {textBad}: {reviewBad}
+      </p>
+      <p>Total Reviews: {totalReviews}</p>
+      <p>Positive ratio: {positiveRatio.toFixed(2)}%</p>
     </div>
   );
+};
+
+const StatisticsLine = ({ total, divider }) => {
+  let calculatedStats = total / divider;
+  if (divider > 0) {
+    return (
+      <div>
+        <p>Reviews stats: {calculatedStats.toFixed(2)}</p>
+      </div>
+    );
+  }
 };
 
 const App = () => {
@@ -41,6 +56,7 @@ const App = () => {
     neutral: neutral,
     bad: bad,
   };
+
   const globalStats = (value) => {
     setCount(count + value);
   };
@@ -72,6 +88,7 @@ const App = () => {
       <Button handleClick={negative} text="Bad" />
       <h2>statistics</h2>
       <Statistics reviewGood={reviews.good} textGood="Good" reviewBad={reviews.bad} textBad="Bad" reviewNeutral={reviews.neutral} textNeutral="Neutral" stats={count} />
+      <StatisticsLine divider={reviews.good + reviews.neutral + reviews.bad} total={count} />
     </div>
   );
 };
