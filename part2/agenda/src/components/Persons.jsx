@@ -1,13 +1,19 @@
-const Persons = ({ object, searchParam }) => {
+const Persons = ({ object, searchParam, handleDelete }) => {
+  const filteredList = object.filter((person) => person.name.toLowerCase().includes(searchParam.toLowerCase()));
+
   return (
     <>
-      {object
-        .filter((x) => x.name.toLowerCase().includes(searchParam.toLowerCase()))
-        .map((person) => (
-          <p key={person.name}>
-            {person.name} - {person.number}
-          </p>
-        ))}
+      {filteredList.map((person) => (
+        <p key={person.id}>
+          {person.name} - {person.number}
+          <button
+            onClick={() => {
+              handleDelete(person.id);
+            }}>
+            Delete
+          </button>
+        </p>
+      ))}
     </>
   );
 };
