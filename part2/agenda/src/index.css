@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+}
+
+p > button {
+  margin-left: 10px;
+}
+
+.alert {
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid;
+  margin-bottom: 40px;
+}
+.error {
+  color: red;
+  background: rgb(255, 210, 210);
+}
+.success {
+  color: green;
+  background: rgb(223, 255, 223);
+}
+
+form > div + div {
+  margin-top: 20px;
+}
